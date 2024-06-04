@@ -1,4 +1,4 @@
-# README
+# My Social App - Backend
 
 This README provides instructions on setting up and running the application.
 
