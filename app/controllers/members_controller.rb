@@ -29,7 +29,7 @@ class MembersController < ApplicationController
     if @member.save
       log_in @member
       FetchHeadingsFromUrlJob.perform_later(@member)
-      render json: 'Member added successfully', status: :created
+      render json: @member, status: :created
     else
       render json: @member.errors, status: :unprocessable_entity
     end
