@@ -1,16 +1,20 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  resources :members
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :members do
+    get 'find_people_you_may_know', on: :member
+  end
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  post 'members/:id/add_friend', to: 'members#add_friend'
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  get '/headings/search', to: 'headings#search'
+
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: %i[new create destroy]
 end

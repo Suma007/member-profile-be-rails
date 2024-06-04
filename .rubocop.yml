@@ -1,0 +1,39 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-factory_bot
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "db/schema.rb"
+    - "db/seeds.rb"
+    - "db/migrate/*.rb"
+    - "Gemfile"
+    - "lib/tasks/*.rake"
+    - "bin/*"
+    - "config/*.rb"
+    - "config/*/*.rb"
+    - "config/*.yml"
+    - "spec/spec_helper.rb"
+    - "spec/rails_helper.rb"
+    - "spec/support/factory_bot.rb"
+    - "tmp/*"
+    - "vendor/*"
+    - "Rakefile"
+    - "channels/*/*.rb"
+
+Style/Documentation:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+RSpec:
+  Enabled: true
+
+FactoryBot:
+  Enabled: true
+
+Layout/EndOfLine:
+   Enabled: false

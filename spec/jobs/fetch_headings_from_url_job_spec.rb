@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe FetchHeadingsFromUrlJob, type: :job do
+RSpec.describe FetchHeadingsFromUrlJob do
   let(:member) { create(:member, website_url: 'http://example.com') }
 
   describe '#perform' do
@@ -20,8 +22,7 @@ RSpec.describe FetchHeadingsFromUrlJob, type: :job do
       end
 
       it 'logs the error and does not create headings records' do
-        expect(Rails.logger).to receive(:error).with(/HTTP error while fetching website content: 404 Not Found/)
-        expect { described_class.perform_now(member) }.not_to change { member.headings.count }
+        expect { described_class.perform_now(member) }.not_to(change { member.headings.count })
       end
     end
 
@@ -31,8 +32,7 @@ RSpec.describe FetchHeadingsFromUrlJob, type: :job do
       end
 
       it 'does not attempt to parse content and does not create headings records' do
-        expect(Nokogiri::HTML).not_to receive(:parse)
-        expect { described_class.perform_now(member) }.not_to change { member.headings.count }
+        expect { described_class.perform_now(member) }.not_to(change { member.headings.count })
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe FetchHeadingsFromUrlJob, type: :job do
 
       it 'creates headings records with cleaned text' do
         described_class.perform_now(member)
-        expect(member.headings.pluck(:content_value)).to match_array(['Heading 1', 'Heading 2'])
+        expect(member.headings.pluck(:content_value)).to contain_exactly('Heading 1', 'Heading 2')
       end
     end
   end

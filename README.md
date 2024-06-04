@@ -21,6 +21,7 @@ bundle exec rspec
 
 * Services (job queues, cache servers, search engines, etc.)
 bundle exec sidekiq - run the sidekiq
+wsl sudo service redis-server status
 
 * Deployment instructions
 

@@ -26,5 +26,10 @@ module MemberProfileBeRails
 
     config.active_job.queue_adapter = :sidekiq
     config.active_record.maintain_test_schema = true
+    
+    config.middleware.use ActionDispatch::Session::CookieStore, key: 'session'
+
+    config.api_only = true
+
   end
 end

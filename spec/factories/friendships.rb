@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :friendship do
-    association :member
-    association :friend, factory: :member
+    member
+    friend factory: %i[member]
   end
 end
