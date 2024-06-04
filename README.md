@@ -52,7 +52,7 @@ To get started with the project, follow these steps:
 2. Navigate to the project directory:
 
    ```bash
-   cd member-profile-be-rails
+   cd my-social-app-be
    ```
 
 3. Install dependencies:
