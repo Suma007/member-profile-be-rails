@@ -1,38 +1,64 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README provides instructions on setting up and running the application.
 
-* Ruby version ruby-3.3.1
+### Ruby version
+ruby-3.3.1
 
-* System dependencies
-sidekiq
+### System Components
+The system consists of three tables: 
+1. `members`: contains member details
+2. `friendship`: stores friend details
+3. `headings`: contains heading details from the user's website
 
-* Configuration
+### System Dependencies
+- Sidekiq is used to run the job that retrieves headings from users' websites and adds them to the `headings` table.
 
-* Database creation
+### Database Setup
+To create the database, run:
+```
 rails db:create
-
-* Database initialization
+```
+To initialize the database, run:
+```
 rails db:migrate
+```
 
-* How to run the test suite
+### Running Tests
+To run the test suite, execute:
+```
 bundle exec rspec
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-bundle exec sidekiq - run the sidekiq
+### Services
+Ensure Sidekiq is running using:
+```
+bundle exec sidekiq
+```
+
+### Running Locally
+Follow these steps to run the application locally:
+1. Start the server with:
+```
+rails s
+```
+2. Run the Sidekiq job to retrieve data from customers' websites:
+```
+bundle exec sidekiq
+```
+3. Execute specs with:
+```
+bundle exec rspec
+```
+4. Check code quality with RuboCop:
+```
+bundle exec rubocop
+```
+
+### Running Redis Server on Windows
+If you're using a Windows machine, you can run the Redis server using WSL. Check the status with:
+```
 wsl sudo service redis-server status
+```
 
-* Deployment instructions
-
-* 
-I can create a "Member" by entering a name and their website address/URL.
-When a member is added, all the headings (h1-h3) on their website should be retrieved and stored.
-Members can be friends with other members. Friendships are bi-directional (i.e. if A is friends with B, then B is friends with A).
-Add a search function to the homepage. The search input should match headings collected from member websites, and it should return a list of members and the relevant matched heading.
-Add a similar search function to a member's profile page to help members figure out how to be introduced to other members. Perform this search in the context of the member (i.e. avoid returning the same member in results) and enhance the search results here to output the shortest path from the member to the search result members (e.g. if C is a result when searching from member A’s profile page, then A -> B -> C might be the shortest path).
-
-
-
-
-
+Make sure to install the necessary dependencies and configure your environment properly before running the application.
